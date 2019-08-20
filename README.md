@@ -20,7 +20,7 @@ program to find the fusions for you. Here it is!
 **How to Use the Calculator**
 
 Visit the Fusion Search and Calculator on [GitHub
-Pages!](https://solumin.github.io/YGO-FM-FusionCalc/)
+Pages!](https://pietrocaselani.github.io/YGO-FM-FusionCalc/)
 
 ### What's Next?
 
