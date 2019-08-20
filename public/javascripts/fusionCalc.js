@@ -16,11 +16,11 @@ for (i = 1; i <= 5; i++) {
 // Creates a div for each fusion
 function fusesToHTML(fuselist) {
     return fuselist.map(function (fusion) {
-        var res = "<div class='result-div'>Input: " + fusion.card1.Name + "<br>Input: " + fusion.card2.Name;
+        var res = "<div class='result-div'>Input: " + fusion.card1.Name + " [" + cardTypes[fusion.card1.Type] + "]" + "<br>Input: " + fusion.card2.Name + " [" + cardTypes[fusion.card2.Type] + "]";
         if (fusion.result) { // Equips and Results don't have a result field
             res += "<br>Result: " + fusion.result.Name;
             if (isMonster(fusion.result)) {
-                res += " " + formatStats(fusion.result.Attack, fusion.result.Defense);
+                res += " " + formatStats(fusion.result.Attack, fusion.result.Defense) + " [" + cardTypes[fusion.result.Type] + "]";
             } else {
                 res += " [" + cardTypes[fusion.result.Type] + "]";
             }
