@@ -71,6 +71,30 @@ function hasFusion(fusionList, card) {
     return fusionList.some(c => c.Id === card.Id);
 }
 
+function findFusionsAndEquips(cardsArray, funsionsArray, equipsArray) {
+    var fuses = [];
+    var equips = [];
+
+    for (i = 0; i < cardsArray.length - 1; i++) {
+        var card1 = cardsArray[i];
+        var card1Fuses = funsionsArray[card1.Id];
+        var card1Equips = equipsArray[card1.Id];
+        for (j = i + 1; j < cardsArray.length; j++) {
+            var card2 = cardsArray[j];
+            var fusion = card1Fuses.find(f => f.card === card2.Id);
+            if (fusion) {
+                fuses.push({ card1: card1, card2: card2, result: getCardById(fusion.result) });
+            }
+            var equip = card1Equips.find(e => e === card2.Id);
+            if (equip) {
+                equips.push({ card1: card1, card2: card2 });
+            }
+        }
+    }
+
+    return { fuses, equips };
+}
+
 function findFusions() {
     var cards = [];
     var monsters = [];
@@ -84,25 +108,10 @@ function findFusions() {
         }
     }
 
-    var fuses = [];
-    var equips = [];
+    var result = findFusionsAndEquips(cards, fusionsList, equipsList);
 
-    for (i = 0; i < cards.length - 1; i++) {
-        var card1 = cards[i];
-        var card1Fuses = fusionsList[card1.Id];
-        var card1Equips = equipsList[card1.Id];
-        for (j = i + 1; j < cards.length; j++) {
-            var card2 = cards[j];
-            var fusion = card1Fuses.find(f => f.card === card2.Id);
-            if (fusion) {
-                fuses.push({ card1: card1, card2: card2, result: getCardById(fusion.result) });
-            }
-            var equip = card1Equips.find(e => e === card2.Id);
-            if (equip) {
-                equips.push({ card1: card1, card2: card2 });
-            }
-        }
-    }
+    var fuses = result.fuses;
+    var equips = result.equips;
 
     outputLeft.innerHTML = "<h2 class='center'>Fusions:</h2>";
     outputLeft.innerHTML += fusesToHTML(fuses.sort((a, b) => b.result.Attack - a.result.Attack));
