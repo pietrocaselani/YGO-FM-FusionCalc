@@ -111,6 +111,14 @@ function findFusions() {
     var fuses = result.fuses;
     var equips = result.equips;
 
+    const newCards = fuses.map(f => f.result);
+
+    const allCards = cards.concat(newCards);
+
+    result = findFusionsAndEquips(allCards, fusionsList, equipsList);
+    fuses = result.fuses;
+    equips = result.equips;
+
     outputLeft.innerHTML = "<h2 class='center'>Fusions:</h2>";
     outputLeft.innerHTML += fusesToHTML(fuses.sort((a, b) => b.result.Attack - a.result.Attack));
 
