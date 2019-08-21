@@ -97,8 +97,6 @@ function findFusionsAndEquips(cardsArray, funsionsArray, equipsArray) {
 
 function findFusions() {
     var cards = [];
-    var monsters = [];
-    var others = [];
 
     for (i = 1; i <= 5; i++) {
         var name = $("#hand" + i).val();
